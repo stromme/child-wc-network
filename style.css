@@ -1,0 +1,12 @@
+/*
+Theme Name: WC Network
+Theme URI: www.windowcleaning.com
+Author: Hatch
+Author URI: hatchspot.com
+Description: WindowCleaning.com network site.
+Template: playground
+Version: 1.0
+*/
+
+@import url("../playground/theme-min.css");
+@import url("../playground/theme-responsive.css");
