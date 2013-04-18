@@ -37,5 +37,10 @@ function tb_register_bulletin() {
 
 add_action('init', 'tb_register_bulletin');
 
+function hs_google_publisher() {
+	echo '<link href="https://plus.google.com/110109148861996385232" rel="publisher" />';
+}
+add_action('wp_head', 'hs_google_publisher');
+
 
 ?>
