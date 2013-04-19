@@ -32,7 +32,7 @@ $seo = get_location_seo();
 			<div class="center border-radius header-cta-well">
 				<div class="hidden-desktop center"><a href="<?=get_home_url().$blog_prefix."/"?>"><img src="<?php echo TOOLBOX_IMAGES; ?>/wc-logo-simplified.png" itemprop="logo"></a></div>
 				<div class="pen-stroke hidden-desktop"></div>
-				<h3>Find your nearest location and <strong>get a instant quote</strong></h3>
+				<h3>Find your nearest location and <strong>get a instant quote.</strong></h3>
 				<div class="form-search">
 				  <div class="input-append">
 				    <input type="text" class="search-query jumbo-input input-medium" placeholder="ZIP or Postal Code">
