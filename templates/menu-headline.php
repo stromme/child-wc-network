@@ -24,7 +24,7 @@ $seo = get_location_seo();
 			<li class="headline-phone">
 				<?php $tb_company = get_option('tb_company'); ?>
 			
-				<h2 class="white" ><a href="<?=get_home_url().get_blog_prefix()."/locations/"?>" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">Over 900 Locations</a></h2>
+				<h2 class="white" ><a href="<?=get_home_url()."locations/"?>" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Find your nearest location">Over 900 Locations</a></h2>
 			</li>
 		</ul>
 		<nav class="pull-right header-cta">
