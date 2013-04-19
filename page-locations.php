@@ -32,7 +32,7 @@ get_header();
 						</ul>
 					</span>
 					<button class="btn btn-large btn-success">Go!</button>
-					<p class="muted"><small>Recommended by customer in over 900 cities.</small></p>
+					<p class="muted"><small>Recommended by customers in over 900 cities.</small></p>
 				</div>
 				<ul class="city-list">
 					<li><a href="#" class="label-city"><h3>San Francisco</h3></a></li>	

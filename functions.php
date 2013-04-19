@@ -42,5 +42,4 @@ function hs_google_publisher() {
 }
 add_action('wp_head', 'hs_google_publisher');
 
-
 ?>
