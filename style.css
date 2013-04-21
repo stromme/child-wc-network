@@ -73,10 +73,13 @@ Version: 1.0
 
 
 @media (min-width: 1200px) {
+	.headline ul {
+		width: 750px;
+	}
 	.header-cta{
 		position: relative;
 		right: 2px;
-		width: 693px;
+		width: 750px;
 	}
 	.header-cta-well {
 		width: 100%;
