@@ -13,7 +13,7 @@
 	<section class="footer bg-slate-invert" itemprop="member" itemscope="http://schema.org/Organization">
 		
 		<?php if (!is_page('locations')) { ?>
-		<h3>Find your nearest location and <strong>get a instant quote.</strong></h3>
+		<h3>Find your nearest location and <strong>get an instant quote.</strong></h3>
 		<div class="form-search bumper">
 		  <div class="input-append">
 		    <input type="text" class="search-query jumbo-input input-medium" placeholder="ZIP or Postal Code">
