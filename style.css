@@ -80,10 +80,18 @@ Version: 1.0
 	.headline ul {
 		width: 750px;
 	}
+	/*Used for membership page*/
+	.headline-small ul {
+		width: 600px !important;
+	}
 	.header-cta{
 		position: relative;
 		right: 2px;
 		width: 750px;
+	}
+	/*Used for membership page*/
+	.header-cta-small{
+		width: 600px !important;
 	}
 	.header-cta-well {
 		width: 100%;
