@@ -91,7 +91,20 @@ if (is_page('membership')) {
 		
 		<!-- Brand -->
 		<div class="brand visible-desktop" itemprop="brand" itemscope="http://schema.org/Brand">
-			<a href="<?=get_home_url().$blog_prefix."/"?>"><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
+      <?php
+      $header = get_header_image();
+      $ss = get_stylesheet_directory_uri();
+      if(strstr($header, $ss)){
+        $ss_file = str_replace($ss, get_stylesheet_directory(), $header);
+        if(file_exists($ss_file)) $header = get_header_image();
+        else {
+          $ss_file = str_replace($ss, get_template_directory(), $header);
+          if(file_exists($ss_file)) $header = str_replace($ss, get_template_directory_uri(), $header);
+          else $header = THEME_IMAGES."brand/window-cleaning-dot-com-logo.png";
+        }
+      }
+      ?>
+			<a href="<?=get_home_url().$blog_prefix."/"?>"><img src="<?=$header?>" itemprop="logo"></a>
 		</div>
 		<!-- /Brand -->
 		
