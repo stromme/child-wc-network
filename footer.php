@@ -15,9 +15,9 @@
 		<?php if (!is_page('locations')) { ?>
 		<h3>Find your nearest location and <strong>get an instant quote.</strong></h3>
 		<div class="form-search bumper">
-		  <div class="input-append">
-		    <input type="text" class="search-query jumbo-input input-medium" placeholder="ZIP or Postal Code">
-		    <button type="submit" class="btn btn-success jumbo-input">Go!</button>
+		  <div class="input-append find-location">
+		    <input type="text" class="search-query jumbo-input input-medium" validation="not-empty zip" placeholder="ZIP or Postal Code">
+		    <button type="submit" class="btn btn-success jumbo-input" data-nonce="<?=wp_create_nonce('find-location-'.date('Ymd'))?>">Go!</button>
 		  </div>
 		</div>
 		<?php } ?>
