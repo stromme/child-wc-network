@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: WC Locations
+ * Template Name: Membership
  * Description: List of wc.com locations
  *
  * @package 
