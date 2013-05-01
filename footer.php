@@ -12,7 +12,7 @@
 ?>
 	<section class="footer bg-slate-invert" itemprop="member" itemscope="http://schema.org/Organization">
 		
-		<?php if (!is_page('locations')) { ?>
+		<?php if ( (!is_page('locations') && (!is_page('membership')) ) { ?>
 		<h3>Find your nearest location and <strong>get an instant quote.</strong></h3>
 		<div class="form-search bumper">
 		  <div class="input-append">
@@ -28,7 +28,7 @@
 			<a href="<?=get_home_url().$blog_prefix."/"?>services/commercial-window-cleaning">Commercial Window Cleaning</a>
 			<a href="<?=get_home_url().$blog_prefix."/"?>locations" rel="nofollow">Our Locations</a>
 			<a href="<?=get_home_url().$blog_prefix."/"?>news" rel="nofollow">News</a>
-			<a href="<?=get_home_url().$blog_prefix."/"?>members">Apply for Membership</a></p>
+			<a href="<?=get_home_url().$blog_prefix."/"?>membership">Apply for Membership</a></p>
 		<p><small><span itemprop="description">North America's Best Window Cleaners</span> | Copyright 2013 | <a href="">Privacy</a> | <a href="">Terms</a></small></p>
 	</section>
 
