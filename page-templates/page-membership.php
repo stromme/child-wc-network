@@ -15,7 +15,7 @@ the_content();
 
 <!-- Lead Modal -->
 <div class="big-modal">
-  <div class="modal hide fade bg-slate" id="member-application">
+  <div class="modal  bg-slate" id="member-application">
     <div class="modal-header center bumper-top bumper-bottom">
       <h3><strong class="green">100% refund</strong> within 60 days if you don’t love being a member.</h3>
     </div>
@@ -28,7 +28,7 @@ the_content();
       </div>
       <div>
         <div class="input-prepend">
-            <span class="add-on"><i class="icon-breifcase"></i></span>
+            <span class="add-on"><i class="icon-briefcase"></i></span>
             <input validation="not-empty" placeholder="Company Name" type="text" value="" />
         </div>
       </div>
