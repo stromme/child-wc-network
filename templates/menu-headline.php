@@ -52,8 +52,16 @@ if (is_page('membership')) {
 	global $post;
 	$seo = get_location_seo();
 	
-	// Get the service type being viewed if we're on a services page and put it in the H1 element.
-	$title = ( ( 'cftl-tax-landing' == get_post_type() ) ? 'North America\'s <b> Best '.ucwords($post->post_title).'</b>' : 'North America\'s <b> Best Window Cleaning</b> Professionals.' );
+	// Get the page title
+	
+	if ( 'cftl-tax-landing' == get_post_type() ) {
+		$title = 'North America\'s <b> Best '.ucwords($post->post_title).'</b>';
+	} elseif ( is_front_page() ) {
+		$title = 'North America\'s <b> Best Window Cleaning</b> Professionals.';
+	} else {
+		$title = ucwords($post->post_title);
+	}
+	
 	
 	?>
 	
