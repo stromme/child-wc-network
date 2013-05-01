@@ -1,66 +1,64 @@
 <?php
 /**
- * Template Name: Membership
- * Description: Only used for the membership pages
+ * Template Name: WC Locations
+ * Description: List of wc.com locations
  *
  * @package 
  * @subpackage 
  * @since 
  */
- get_header();
  
- the_post();
- the_content();
- ?>
- <!-- Lead Modal -->
-<div class="big-modal">
-	<div class="modal  bg-slate" id="member-application">
-		<div class="modal-header center bumper-top bumper-bottom">
-			<h3><strong class="green">100% refund </strong> within 60 days if you don’t love being a member.</h3>
-		</div>
-		<div class="modal-body center bumper-top">
-			<div>
-				<div class="input-prepend">
-					<span class="add-on"><i class="icon-user"></i></span>
-					<input validation="not-empty" data-field-name="Name" placeholder="Your Name" type="text" value="" />
-				</div>
-			</div>
-			<div>
-				<div class="input-prepend">
-					<span class="add-on"><i class="icon-briefcase"></i></span>
-					<input validation="not-empty" placeholder="Company Name" type="text" value="" />
-				</div>
-			</div>
-			<div>
-				<div class="input-prepend">
-					<span class="add-on"><i class="icon-map-marker"></i></span>
-					<input validation="website" placeholder="City" type="text" value="" />
-				</div>
-			</div>
-			<div>
-				<div class="input-prepend">
-					<span class="add-on"><i class="icon-envelope"></i></span>
-					<input  validation="not-empty email" placeholder="Email Address" type="text" value="" />
-				</div>
-			</div>
-			<div>
-			<div class="input-prepend">
-				<span class="add-on"><i class="icon-phone-halfling"></i></span>
-				<input id="lead-phone" validation="not-empty phone" placeholder="Phone Number" type="text" value="" />
-			</div>
-		</div>
-		<div class="bumper-top-small bumper-bottom">
-			<div class="pen-stroke"></div>
-		</div>
-		<p class="page-left page-right">One of our team members will contact you right away.</p>
-	</div>
+get_header();
+?>
 
-	<div class="modal-footer center">
-		<a href="" class="btn btn-large btn-success save">Quick free estimate</a>
+<section class="container gentle-shadow bg-white bumper-bottom-medium">
+	<div class="page-left page-right bumper-top-medium center">
+		<div class="row-fluid">
+			<div class="offset1 span10">
+				<div class="select-location">
+          <?php if(isset($_REQUEST['find'])){ ?>
+					<h4><strong>Looks like we don't service that area yet, try searching below for a member in your area</strong></h4><br />
+          <?php } ?>
+					<h2>I need a great window cleaner in... </h2>
+					<span class="btn-group select-country">
+            <a class="btn dropdown-toggle btn-large" data-toggle="dropdown" href="" data-country="US">United States <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="" data-country="CA">Canada</a></li>
+            </ul>
+					</span>
+					<span class="btn-group select-state-province">
+						<a class="btn dropdown-toggle btn-large" data-toggle="dropdown" href="#">State <span class="caret"></span></a>
+						<ul class="dropdown-menu" style="max-height:400px;overflow:auto;">
+              <?php
+                $states = tb_get_us_states();
+                foreach($states as $abr=>$state){
+              ?>
+							<li><a href="" data-state-province="<?=$abr?>"><?=$state?></a></li>
+              <?php } ?>
+						</ul>
+					</span>
+          <div id="state-province-templates" class="hide">
+            <?php
+              $provinces = tb_get_ca_provinces();
+              foreach($provinces as $abr=>$province){
+            ?>
+					  <li><a href="" data-state-province="<?=$abr?>"><?=$province?></a></li>
+            <?php
+              }
+            ?>
+          </div>
+					<button class="btn btn-large btn-success lookup" data-nonce="<?=wp_create_nonce('select-location-'.date('Ymd'))?>">Go!</button>
+					<p class="muted"><small>Recommended by customers in over 900 cities.</small></p>
+				</div>
+				<ul class="city-list"></ul>
+			</div>
 	</div>
-</div>
-</div>
- <!-- / modal -->
- <?php
- get_footer();
+	</div>
+</section>
+
+
+
+
+<?php 
+get_footer(); 
 ?>
