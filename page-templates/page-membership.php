@@ -62,10 +62,7 @@ the_content();
       <a href="" class="btn btn-large btn-success save">Apply now</a>
     </div>
   </div>
-</div>
 <!-- / modal -->
-
-
 
 <?php 
 get_footer(); 
