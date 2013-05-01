@@ -8,8 +8,8 @@ Template: playground
 Version: 1.0
 */
 
-@import url("../playground/theme-min.css");
-@import url("../playground/theme-responsive.css");
+@import url("../playground/css/theme-min.css");
+@import url("../playground/css/theme-responsive.css");
 
 .jumbo-input {
 	padding: 7px 15px !important;
@@ -168,5 +168,11 @@ Version: 1.0
 		-webkit-border-radius: 0px;
 		   -moz-border-radius: 0px;
 		        border-radius: 0px;
+	}
+}
+
+@media (max-width: 320px) {
+	.header-cta img {
+		max-width: 290px;
 	}
 }
