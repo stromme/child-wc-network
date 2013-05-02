@@ -22,7 +22,7 @@ if (is_page('membership')) {
 				<li class="headline-phone">
 					<?php $tb_company = get_option('tb_company'); ?>
 				
-					<h2 class="white" ><a href="<?=get_home_url()."/membership/qualify/"?>" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Find your nearest location">See If You Qualify</a></h2>
+					<h2 class="white" ><a href="<?=get_home_url()."/membership/qualify/"?>" class="link-inverse link-decorate link-showoff member-apply" data-toggle="tooltip" data-placement="bottom" title="Find your nearest location">See If You Qualify</a></h2>
 				</li>
 			</ul>
 			<nav class="pull-right header-cta header-cta-small">
