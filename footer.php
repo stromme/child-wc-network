@@ -28,7 +28,7 @@
 			<a href="<?=get_home_url().$blog_prefix."/"?>services/commercial-window-cleaning">Commercial Window Cleaning</a>
 			<a href="<?=get_home_url().$blog_prefix."/"?>locations" rel="nofollow">Our Locations</a>
 			<a href="<?=get_home_url().$blog_prefix."/"?>news" rel="nofollow">News</a>
-			<a href="<?=get_home_url().$blog_prefix."/"?>membership">Apply for Membership</a></p>
+			<a href="<?=get_home_url().$blog_prefix."/"?>members">Apply for Membership</a></p>
 		<p><small><span itemprop="description">North America's Best Window Cleaners</span> | Copyright 2013 | <a href="">Privacy</a> | <a href="">Terms</a></small></p>
 	</section>
 
