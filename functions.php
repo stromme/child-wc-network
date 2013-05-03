@@ -13,6 +13,14 @@
  *
  * @since 0.0.1
  */
+ 
+function hs_custom_login_logo() {
+	echo '<style type="text/css">
+		.login h1 a, #login h1 a { background-image: url('.get_stylesheet_directory_uri().'/images/logo.png) !important; background-size: 285px 155px; padding-bottom: 100px; }
+	</style>';
+}
+add_action('login_head', 'hs_custom_login_logo');
+
 
 function tb_register_bulletin() {
 	register_post_type('bulletin',
