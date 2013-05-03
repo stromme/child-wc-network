@@ -24,12 +24,12 @@
 		<img src="<?php echo THEME_IMAGES; ?>brand/window-cleaning-dot-com-logo.png" itemprop="logo" class="bumper-bottom-medium">
 		
 		<p class="footer-links">
-			<a href="<?=get_home_url().$blog_prefix."/"?>services/home-window-cleaning">Home Window Cleaning</a>
-			<a href="<?=get_home_url().$blog_prefix."/"?>services/commercial-window-cleaning">Commercial Window Cleaning</a>
-			<a href="<?=get_home_url().$blog_prefix."/"?>locations" rel="nofollow">Our Locations</a>
-			<a href="<?=get_home_url().$blog_prefix."/"?>news" rel="nofollow">News</a>
+			<a href="<?=get_home_url()."/"?>services/home-window-cleaning">Home Window Cleaning</a>
+			<a href="<?=get_home_url()."/"?>services/commercial-window-cleaning">Commercial Window Cleaning</a>
+			<a href="<?=get_home_url()."/"?>locations" rel="nofollow">Our Locations</a>
+			<!--<a href="<?=get_home_url().$blog_prefix."/"?>news" rel="nofollow">News</a>-->
 			<a href="<?=get_home_url().$blog_prefix."/"?>members">Apply for Membership</a></p>
-		<p><small><span itemprop="description">North America's Best Window Cleaners</span> | Copyright 2013 | <a href="">Privacy</a> | <a href="">Terms</a></small></p>
+		<p><small><span itemprop="description">North America's Best Window Cleaners</span> | Copyright 2013 | <a href="<?=get_site_url(1)?>/privacy">Privacy</a> | <a href="<?=get_site_url(1)?>/terms">Terms</a></small></p>
 	</section>
 
 </div><!-- / .container -->
