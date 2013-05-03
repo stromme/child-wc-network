@@ -9,7 +9,7 @@
  */
 
 
-if (is_page('membership')) {
+if (is_page('members')) {
 	// Get the membership page being viewed and put it in the H1 element.
 	$title = ucwords($post->post_title);	
 ?>
@@ -20,9 +20,7 @@ if (is_page('membership')) {
 					<h1 itemprop="description"><?=$title?></h1>
 				</li>
 				<li class="headline-phone">
-					<?php $tb_company = get_option('tb_company'); ?>
-				
-					<h2 class="white" ><a href="<?=get_home_url()."/membership/qualify/"?>" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Find your nearest location">See If You Qualify</a></h2>
+					<h2 class="white" ><a href="#" class="link-inverse link-decorate link-showoff member-apply">See If You Qualify</a></h2>
 				</li>
 			</ul>
 			<nav class="pull-right header-cta header-cta-small">

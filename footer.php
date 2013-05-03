@@ -12,7 +12,7 @@
 ?>
 	<section class="footer bg-slate-invert" itemprop="member" itemscope="http://schema.org/Organization">
 		
-		<?php if ( ( !is_page('locations') ) && ( !is_page('membership') ) )  { ?>
+		<?php if ( ( !is_page('locations') ) && ( !is_page('members') ) )  { ?>
 		<h3>Find your nearest location and <strong>get an instant quote.</strong></h3>
 		<div class="form-search bumper">
 		  <div class="input-append find-location">
