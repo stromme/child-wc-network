@@ -37,7 +37,7 @@ the_content();
           <span class="add-on"><i class="icon-map-marker"></i></span>
           <div class="btn-group select-state-province">
             <a class="btn dropdown-toggle btn-medium" data-toggle="dropdown" href="#">State / Province <span class="caret"></span></a>
-            <ul class="dropdown-menu" style="max-height:280px;overflow:auto;">
+            <ul class="dropdown-menu">
               <li class="list-description">US States</li>
               <?php
               $states = tb_get_us_states();
