@@ -22,32 +22,58 @@ the_content();
     <div class="modal-body center bumper-top">
       <div>
         <div class="input-prepend">
-            <span class="add-on"><i class="icon-user"></i></span>
-            <input class="member-name" validation="not-empty min-length-3" data-field-name="Name" placeholder="Your Name" type="text" value="" />
+          <span class="add-on"><i class="icon-user"></i></span>
+          <input class="member-name" validation="not-empty min-length-3" data-field-name="Name" placeholder="Your Name" type="text" value="" />
         </div>
       </div>
       <div>
         <div class="input-prepend">
-            <span class="add-on"><i class="icon-briefcase"></i></span>
-            <input class="member-company" validation="not-empty min-length-3" placeholder="Company Name" type="text" value="" />
+          <span class="add-on"><i class="icon-briefcase"></i></span>
+          <input class="member-company" validation="not-empty min-length-3" placeholder="Company Name" type="text" value="" />
         </div>
       </div>
       <div>
         <div class="input-prepend">
-            <span class="add-on"><i class="icon-map-marker"></i></span>
-            <input class="member-city" validation="not-empty" placeholder="City" type="text" value="" />
+          <span class="add-on"><i class="icon-map-marker"></i></span>
+          <div class="btn-group select-state-province">
+            <a class="btn dropdown-toggle btn-medium" data-toggle="dropdown" href="#">State / Province <span class="caret"></span></a>
+            <ul class="dropdown-menu" style="max-height:280px;overflow:auto;">
+              <li class="list-description">US States</li>
+              <?php
+              $states = tb_get_us_states();
+              foreach($states as $state){
+              ?>
+              <li><a href="" data-state-province="United States, <?=$state?>"><?=$state?></a></li>
+              <?php } ?>
+              <li class="list-description">Canada Provinces</li>
+              <?php
+              $provinces = tb_get_ca_provinces();
+              foreach($provinces as $province){
+                ?>
+                  <li><a href="" data-state-province="Canada, <?=$province?>"><?=$province?></a></li>
+                <?php
+              }
+              ?>
+            </ul>
+          </div>
         </div>
       </div>
       <div>
         <div class="input-prepend">
-            <span class="add-on"><i class="icon-envelope"></i></span>
-            <input class="member-email" validation="not-empty email" placeholder="Email Address" type="text" value="" />
+          <span class="add-on"><i class="icon-map-marker"></i></span>
+          <input class="member-city" validation="not-empty" placeholder="City" type="text" value="" />
         </div>
       </div>
       <div>
         <div class="input-prepend">
-            <span class="add-on"><i class="icon-phone-halfling"></i></span>
-            <input class="member-phone" validation="not-empty phone" placeholder="Phone Number" type="text" value="" />
+          <span class="add-on"><i class="icon-envelope"></i></span>
+          <input class="member-email" validation="not-empty email" placeholder="Email Address" type="text" value="" />
+        </div>
+      </div>
+      <div>
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-phone-halfling"></i></span>
+          <input class="member-phone" validation="not-empty phone" placeholder="Phone Number" type="text" value="" />
         </div>
       </div>
       <div class="bumper-top-small bumper-bottom">
