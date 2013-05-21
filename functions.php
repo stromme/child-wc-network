@@ -52,7 +52,7 @@ function find_windowcleaning_location(){
   if(wp_verify_nonce((isset($_REQUEST['_nonce'])?$_REQUEST['_nonce']:''), 'find-location-'.date('Ymd'))){
     global $wpdb;
     $zip = $_REQUEST['zip'];
-    $wpdb->query("SELECT * FROM tb_zip_codes WHERE zip=".$zip." ORDER BY id ASC");
+    $wpdb->query("SELECT * FROM tb_zip_codes WHERE zip='".$zip."' ORDER BY id ASC");
     $blog_id = '';
     $results = $wpdb->last_result;
     if(count($results)>0){
@@ -63,7 +63,7 @@ function find_windowcleaning_location(){
       }
       else {
         $location_id = $result->location_id;
-        $wpdb->query("SELECT blog_id FROM tb_zip_codes WHERE location_id=".$location_id." GROUP BY location_id ASC");
+        $wpdb->query("SELECT blog_id FROM tb_zip_codes WHERE location_id='".$location_id."' GROUP BY location_id ASC");
         $results = $wpdb->last_result;
         if(count($results)>0){
           $blog = $result->blog_id;
