@@ -79,7 +79,7 @@ the_content();
       <div class="bumper-top-small bumper-bottom">
         <div class="pen-stroke"></div>
       </div>
-      <p class="page-left page-right">One of our team members will contact you right away.</p>
+      <p class="page-left page-right">Join North America's Best Window Cleaners</p>
     </div>
 
     <div class="modal-footer center">
