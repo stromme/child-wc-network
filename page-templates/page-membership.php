@@ -83,7 +83,7 @@ the_content();
     </div>
 
     <div class="modal-footer center">
-      <a href="" class="btn btn-large btn-success save" data-nonce="<?=wp_create_nonce('new-membership-'.date('Ymd'))?>">Apply now</a>
+      <a href="" class="btn btn-large btn-success save" data-nonce="<?=wp_create_nonce('new-membership-'.date('Ymd'))?>">Take a walk through</a>
     </div>
   </div>
 <!-- / modal -->
