@@ -17,7 +17,8 @@ the_content();
 <div class="big-modal">
   <div class="modal hide fade bg-slate" id="member-application">
     <div class="modal-header center bumper-top bumper-bottom">
-      <h3><strong class="green">100% refund</strong> within 60 days if you don’t love being a member.</h3>
+     <!-- <h3><strong class="green">100% refund</strong> within 60 days if you don’t love being a member.</h3>-->
+      <h3>Join <strong class="green">North America's Best</strong> Window Cleaners.</h3>
     </div>
     <div class="modal-body center bumper-top">
       <div>
@@ -76,10 +77,10 @@ the_content();
           <input class="member-phone" validation="not-empty phone" placeholder="Phone Number" type="text" value="" />
         </div>
       </div>
-      <div class="bumper-top-small bumper-bottom">
+     <!-- <div class="bumper-top-small bumper-bottom">
         <div class="pen-stroke"></div>
-      </div>
-      <p class="page-left page-right">Join North America's Best Window Cleaners</p>
+      </div>-->
+      <!--<p class="page-left page-right">Join North America's Best Window Cleaners</p>-->
     </div>
 
     <div class="modal-footer center">
