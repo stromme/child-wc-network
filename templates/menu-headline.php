@@ -11,7 +11,7 @@
 
 if (get_bloginfo('name') = 'Membership') {
 	// Get the membership page being viewed and put it in the H1 element.
-	$title = ucwords($post->post_title);	
+	$title = ucwords((isset($post->post_title))?$post->post_title:'');
 ?>
 	<header class="container">
 		<div class="headline headline-small">
@@ -57,7 +57,7 @@ if (get_bloginfo('name') = 'Membership') {
 	} elseif ( is_front_page() ) {
 		$title = 'North America\'s <b> Best Window Cleaning</b> Professionals.';
 	} else {
-		$title = ucwords($post->post_title);
+		$title = ucwords((isset($post->post_title))?$post->post_title:'');
 	}
 	
 	
