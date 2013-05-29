@@ -20,7 +20,7 @@ if (is_page('members')) {
 					<h1 itemprop="description"><?=$title?></h1>
 				</li>
 				<li class="headline-phone">
-					<h2 class="white" ><a href="#" class="link-inverse link-decorate link-showoff member-apply">See If You Qualify</a></h2>
+					<h2 class="white" ><a href="#" class="link-inverse link-decorate link-showoff member-apply">Learn More</a></h2>
 				</li>
 			</ul>
 			<nav class="pull-right header-cta header-cta-small">
