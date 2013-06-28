@@ -9,7 +9,7 @@
  */
 
 
-if (is_page('members')) {
+if ( get_bloginfo('name') == 'Membership') {
 	// Get the membership page being viewed and put it in the H1 element.
 	$title = ucwords((isset($post->post_title))?$post->post_title:'');
 ?>
