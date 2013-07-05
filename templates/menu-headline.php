@@ -26,7 +26,7 @@ if ( get_bloginfo('name') == 'Membership') {
 			<nav class="pull-right header-cta header-cta-small">
 				
 				<div class="center border-radius header-cta-well">
-					<div class="hidden-desktop center"><a href="<?=get_home_url().$blog_prefix."/"?>"><img src="<?php echo TOOLBOX_IMAGES; ?>/wc-logo-simplified.png" itemprop="logo"></a></div>
+					<div class="hidden-desktop center"><a href="<?=get_home_url()?>"><img src="<?php echo TOOLBOX_IMAGES; ?>/wc-logo-simplified.png" itemprop="logo"></a></div>
 					<div class="pen-stroke hidden-desktop"></div>
 					<h3>We only approve <strong>one member</strong> from each city.</h3>
 					<!--<button class="btn btn-success">See if you qualify</button>-->
@@ -38,7 +38,7 @@ if ( get_bloginfo('name') == 'Membership') {
 		
 		<!-- Brand -->
 		<div class="brand visible-desktop" itemprop="brand" itemscope="http://schema.org/Brand">
-			<a href="<?=get_home_url().$blog_prefix."/"?>"><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
+			<a href="<?=get_home_url()?>"><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
 		</div>
 		<!-- /Brand -->
 		
@@ -79,7 +79,7 @@ if ( get_bloginfo('name') == 'Membership') {
 			<nav class="pull-right header-cta">
 				
 				<div class="center border-radius header-cta-well">
-					<div class="hidden-desktop center"><a href="<?=get_home_url().$blog_prefix."/"?>"><img src="<?php echo TOOLBOX_IMAGES; ?>/wc-logo-simplified.png" itemprop="logo"></a></div>
+					<div class="hidden-desktop center"><a href="<?=get_home_url()?>"><img src="<?php echo TOOLBOX_IMAGES; ?>/wc-logo-simplified.png" itemprop="logo"></a></div>
 					<div class="pen-stroke hidden-desktop"></div>
 					<h3>Find your nearest location and <strong>get an instant quote.</strong></h3>
 					<div class="form-search">
@@ -110,7 +110,7 @@ if ( get_bloginfo('name') == 'Membership') {
         }
       }
       ?>
-			<a href="<?=get_home_url().$blog_prefix."/"?>"><img src="<?=$header?>" itemprop="logo"></a>
+			<a href="<?=get_home_url()?>"><img src="<?=$header?>" itemprop="logo"></a>
 		</div>
 		<!-- /Brand -->
 		
