@@ -68,13 +68,13 @@ the_content();
       <div>
         <div class="input-prepend">
           <span class="add-on"><i class="icon-envelope"></i></span>
-          <input class="member-email" validation="not-empty email" placeholder="Email Address" type="text" value="" />
+          <input class="member-email lowercase-only" validation="not-empty email" placeholder="Email Address" type="email" value="" />
         </div>
       </div>
       <div>
         <div class="input-prepend">
           <span class="add-on"><i class="icon-phone-halfling"></i></span>
-          <input class="member-phone" validation="not-empty phone" placeholder="Phone Number" type="text" value="" />
+          <input class="member-phone" validation="not-empty phone" placeholder="Phone Number" type="tel" value="" />
         </div>
       </div>
      <!-- <div class="bumper-top-small bumper-bottom">

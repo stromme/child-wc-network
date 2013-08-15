@@ -27,7 +27,7 @@
 	
 	<!-- Brand --*>
 	<div class="brand" itemprop="brand" itemscope="http://schema.org/Brand">
-		<a href="<?=get_home_url().$blog_prefix."/"?>"><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
+		<a href="<?=get_home_url()?>"><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
 	</div>
 	<!-- /Brand --*>
 	
