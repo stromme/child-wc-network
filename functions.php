@@ -97,7 +97,7 @@ add_action('wp_ajax_nopriv_find_windowcleaning_location', 'find_windowcleaning_l
  * Ajax function to select location
  */
 function select_windowcleaning_location(){
-  if(wp_verify_nonce((isset($_REQUEST['_nonce'])?$_REQUEST['_nonce']:''), 'select-location-'.date('Ymd'))){
+  if(!defined('W3TC_LIB_W3_DIR') && wp_verify_nonce((isset($_REQUEST['_nonce'])?$_REQUEST['_nonce']:''), 'select-location-'.date('Ymd'))){
     global $wpdb;
 
     $wpdb->query("SELECT l.id, l.city, z.blog_id FROM tb_locations l, tb_zip_codes z WHERE l.province='".$_REQUEST['state_province']."' AND l.id=z.location_id AND z.blog_id<>0 GROUP BY l.id ORDER BY l.id ASC");
