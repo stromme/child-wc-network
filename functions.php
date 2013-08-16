@@ -49,7 +49,7 @@ function find_windowcleaning_location(){
   $status_code = 0;
   $status_message = "Verification error";
   $address = home_url().'/locations/?find';
-  if(wp_verify_nonce((isset($_REQUEST['_nonce'])?$_REQUEST['_nonce']:''), 'find-location-'.date('Ymd'))){
+  if(!defined('W3TC_LIB_W3_DIR') && wp_verify_nonce((isset($_REQUEST['_nonce'])?$_REQUEST['_nonce']:''), 'find-location-'.date('Ymd'))){
     global $wpdb;
     $zip = $_REQUEST['zip'];
     $wpdb->query("SELECT * FROM tb_zip_codes WHERE zip='".$zip."' ORDER BY id ASC");
