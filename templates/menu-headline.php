@@ -39,6 +39,7 @@ if ( get_bloginfo('name') == 'Membership') {
 		<!-- Brand -->
 		<div class="brand visible-desktop" itemprop="brand" itemscope="http://schema.org/Brand">
 			<a href="<?=get_home_url()?>"><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
+      <span class="hide" itemprop="brand">Windowcleaning.com</span>
 		</div>
 		<!-- /Brand -->
 		
