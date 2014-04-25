@@ -104,7 +104,9 @@ function select_windowcleaning_location(){
     $results = $wpdb->last_result;
     if(count($results)>0){
       foreach($results as $result){
-        $delete = get_blog_status($result->blog_id, 'delete');
+        $details = get_blog_details( $result->blog_id, false );
+        echo "<!-- ";
+        var_dump($details);echo " -->";
 
         echo '<li><a href="'.get_blogaddress_by_id($result->blog_id).'" class="label-city"><h3>'.$result->city.'</h3>'.($delete?'.':'').'</a></li>';
       }
