@@ -29,7 +29,7 @@
 			<a href="<?=get_home_url()."/"?>locations" rel="nofollow">Our Locations</a>
 			<!--<a href="<?=get_home_url()."/"?>news" rel="nofollow">News</a>-->
 			<a href="<?=get_home_url()."/"?>members">Apply for Membership</a></p>
-		<p><small><span itemprop="description">North America's Best Window Cleaners</span> | Copyright 2013 | <a href="<?=get_site_url(1)?>/privacy">Privacy</a> | <a href="<?=get_site_url(1)?>/terms">Terms</a></small></p>
+		<p><small><span itemprop="description">North America's Best Window Cleaners</span> | Copyright <?=date('Y')?> | <a href="<?=get_site_url(1)?>/privacy">Privacy</a> | <a href="<?=get_site_url(1)?>/terms">Terms</a></small></p>
 	</section>
 
 </div><!-- / .container -->
