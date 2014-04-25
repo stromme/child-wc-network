@@ -105,7 +105,7 @@ function select_windowcleaning_location(){
     if(count($results)>0){
       foreach($results as $result){
         $details = get_blog_details( $result->blog_id, false );
-        if(!isset($details->deleted) && !$details->deleted){
+        if($details->deleted!=0){
           echo '<li><a href="'.get_blogaddress_by_id($result->blog_id).'" class="label-city"><h3>'.$result->city.'</h3>'.($delete?'.':'').'</a></li>';
         }
       }
