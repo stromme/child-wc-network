@@ -113,6 +113,9 @@ Version: 1.0
 		   -moz-border-radius: 0;
 		        border-radius: 0;
 	}
+  .label-city {
+ 		width: 304px;
+ 	}
 }
 
 @media (max-width: 979px) {
