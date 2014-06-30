@@ -24,11 +24,11 @@
 		<img src="<?php echo THEME_IMAGES; ?>brand/window-cleaning-dot-com-logo.png" itemprop="logo" class="bumper-bottom-medium">
 		
 		<p class="footer-links">
-			<a href="<?=get_home_url()."/"?>services/home-window-cleaning">Home Window Cleaning</a>
-			<a href="<?=get_home_url()."/"?>services/commercial-window-cleaning">Commercial Window Cleaning</a>
-			<a href="<?=get_home_url()."/"?>locations" rel="nofollow">Our Locations</a>
+			<a href="<?=get_home_url(1)."/"?>services/home-window-cleaning">Home Window Cleaning</a>
+			<a href="<?=get_home_url(1)."/"?>services/commercial-window-cleaning">Commercial Window Cleaning</a>
+			<a href="<?=get_home_url(1)."/"?>locations" rel="nofollow">Our Locations</a>
 			<!--<a href="<?=get_home_url()."/"?>news" rel="nofollow">News</a>-->
-			<a href="<?=get_home_url()."/"?>members">Apply for Membership</a></p>
+			<a href="<?=get_home_url()."/"?>">Apply for Membership</a></p>
 		<p><small><span itemprop="description">North America's Best Window Cleaners</span> | Copyright <?=date('Y')?> | <a href="<?=get_site_url(1)?>/privacy">Privacy</a> | <a href="<?=get_site_url(1)?>/terms">Terms</a></small></p>
 	</section>
 
