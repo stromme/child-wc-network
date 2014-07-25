@@ -101,10 +101,17 @@ function select_windowcleaning_location(){
     global $wpdb;
 
     $wpdb->query("SELECT l.id, l.city, z.blog_id FROM tb_locations l, tb_zip_codes z WHERE l.province='".$_REQUEST['state_province']."' AND l.id=z.location_id AND z.blog_id<>0 GROUP BY l.id ORDER BY l.id ASC");
+    echo "<!-- ";
+    var_dump("SELECT l.id, l.city, z.blog_id FROM tb_locations l, tb_zip_codes z WHERE l.province='".$_REQUEST['state_province']."' AND l.id=z.location_id AND z.blog_id<>0 GROUP BY l.id ORDER BY l.id ASC");
+    echo " -->";
     $results = $wpdb->last_result;
     if(count($results)>0){
       foreach($results as $result){
         $details = get_blog_details( $result->blog_id, false );
+        echo "<!-- ";
+        var_dump($result->blog_id);
+        var_dump($details);
+        echo " -->";
         if($details->deleted!=1){
           echo '<li><a href="'.get_blogaddress_by_id($result->blog_id).'" class="label-city"><h3>'.$result->city.'</h3>'.($delete?'.':'').'</a></li>';
         }
