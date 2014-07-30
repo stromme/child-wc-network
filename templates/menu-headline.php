@@ -83,13 +83,13 @@ if ( get_bloginfo('name') == 'Membership') {
 					<div class="hidden-desktop center"><a href="<?=get_home_url()?>"><img src="<?php echo TOOLBOX_IMAGES; ?>/wc-logo-simplified.png" itemprop="logo"></a></div>
 					<div class="pen-stroke hidden-desktop"></div>
 					<h3>Find your nearest location and <strong>get an instant quote.</strong></h3>
-					<div class="form-search">
+					<form class="form-search" method="post" action="">
 					  <div class="input-append find-location">
 					    <input type="text" class="search-query jumbo-input input-medium" validation="not-empty zip" placeholder="ZIP or Postal Code">
 					    <button type="submit" class="btn btn-success jumbo-input" data-nonce="<?=wp_create_nonce('find-location-'.date('Ymd'))?>">Go!</button>
 					  </div>
-					</div>
-					
+					</form>
+
 				</div>
 				
 			</nav>
