@@ -111,7 +111,7 @@ function select_windowcleaning_location(){
       }
     }
     else {
-      echo '<strong>Looks like we don\'t service that area yet.</strong>';
+      echo '<p>We\'re sorry, it looks like we don\'t service that area yet. If you\'re a window cleaner or know a window cleaner that stands out as <strong>the best</strong> in this region, <a href="#" class="member-apply">let us know.</a></p>';
     }
     die();
   }
