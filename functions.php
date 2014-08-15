@@ -42,6 +42,20 @@ function hs_google_publisher() {
 }
 add_action('wp_head', 'hs_google_publisher');
 
+function hs_mailchimp_tracking_tag() {
+	echo "
+<script type=\"text/javascript\">
+  var \$mcGoal = {'settings':{'uuid':'ff82113449','dc':'us6'}};
+	(function() {
+    var sp = document.createElement('script'); sp.type = 'text/javascript'; sp.async = true; sp.defer = true;
+    sp.src = ('https:' == document.location.protocol ? 'https://s3.amazonaws.com/downloads.mailchimp.com' : 'http://downloads.mailchimp.com') + '/js/goal.min.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sp, s);
+  })();
+</script>
+";
+}
+add_action('wp_head', 'hs_mailchimp_tracking_tag');
+
 /**
  * Ajax function to find location
  */
