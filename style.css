@@ -38,8 +38,42 @@ Version: 1.0
 	padding-top: 10px;
 }
 
+.select-location {
+  text-align: center;
+  margin-bottom: 10px;
+}
 .select-location a {
 	min-width: 200px;
+}
+.select-location h2 {
+	line-height: 60px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+.select-location .buttons {
+	padding-top: 20px;
+  padding-left: 10px;
+  display: inline-block;
+}
+.select-location .buttons p {
+  margin-bottom: 0;
+}
+#locations-map {
+  margin-left: 40%;
+  height: 598px;
+  border: 1px solid #ccc;
+  border-right: 0;
+  border-bottom: 0;
+}
+.city-list-container {
+  float: left;
+  width: 40%;
+  height: 598px;
+  border-top: 1px solid #ccc;
+  position: relative;
+  overflow: auto;
 }
 .city-list{
 	list-style: none;
@@ -47,33 +81,54 @@ Version: 1.0
 	padding-bottom: 20px;
 }
 .city-list li {
-	padding: 10px;
-	float: left;
+  display: block;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
 }
-.city-list li:hover .label-city{
-	background-color: #FAFAFA;
-	color: #0083E3;
+.city-list li>a,
+.city-list li .text {
+  position: relative;
+  padding: 20px;
+  display: block;
+  color: #333;
+  font-weight: 200;
+  font-size: 18px;
+  text-decoration: none;
+}
+.city-list li>a[href]:hover,
+.city-list li>a[href]:active {
+  background: #efefef;
+}
+.city-list li>a .city {
+  font-weight: 500;
+}
+.city-list li>a .state {
+  color: #666;
+}
+.city-list li>a .company-name {
+  display: block;
+  font-size: 14px;
+  color: #66AFD4;
+}
+.city-list li>a .arrow {
+  position: absolute;
+  display: block;
+  background: url('images/arrow.png') no-repeat 0 0 scroll transparent;
+  width: 34px;
+  height: 34px;
+  right: 25px;
+  top: 50%;
+  margin-top: -17px;
+  -webkit-transition:all .2s ease-in-out;
+  transition:all .2s ease-in-out;
+}
+.city-list li a:hover .arrow,
+.city-list li a:active .arrow {
+  right: 20px;
 }
 .city-list h4 {
 	margin-bottom: 0;
 }
-.label-city {
-	text-align: center;
-	width: 250px;
-	display: inline-block;
-	background-color: #0083E3;
-	border: 3px solid #0083E3;
-	color: white;
-	padding-left: 5px;
-	padding-right: 5px;
-	-webkit-border-radius: 40px;
-	   -moz-border-radius: 40px;
-	        border-radius: 40px;
-}
-.city-list a {
-	text-decoration: none;
-}
-
 
 
 @media (min-width: 1200px) {
@@ -116,9 +171,12 @@ Version: 1.0
 }
 
 @media (min-width: 980px) and (max-width: 1199px) {
-  .label-city {
- 		width: 304px;
- 	}
+  .select-location h2 {
+    font-size: 30px;
+  }
+  .select-location .btn-group a {
+    min-width: 150px;
+  }
 }
 
 @media (max-width: 979px) {
@@ -151,39 +209,53 @@ Version: 1.0
 	.select-location a {
 		min-width: 180px;
 	}
-	.label-city {
-		text-align: center;
-		width: 230px;
-	}
+  .select-location h2 {
+  	line-height: 40px;
+    display: block;
+  }
+  .select-location .buttons {
+  	margin: 0;
+    display: block;
+  }
+  #locations-map {
+    height: 400px;
+  }
+  .city-list-container {
+    height: 398px;
+  }
 }
 
 @media (min-width: 640px) and (max-width: 767px) {
-  .city-list>li {
-    padding: 0;
-    width: 47%;
-    margin: 0 1% 15px 1%;
+  .city-list-container {
+    height: auto;
+    width: 100%;
+    float: none;
+    border-right: 0;
   }
-  .city-list>li a {
-    width: auto;
-    display: block;
+  .city-list {
+    padding-bottom: 0;
   }
-  .city-list>p {
-    font-weight: 200;
-  }
-  .city-list>p strong {
-    font-weight: 800;
+  #locations-map {
+    margin-left: 0;
+    border-top: 0;
+    border-left: 0;
   }
 }
 
 @media (max-width: 640px) {
-  .city-list>li {
-    padding: 0;
-    width: 80%;
-    margin: 0 10% 10px 10%;
+  .city-list-container {
+    height: auto;
+    width: 100%;
+    float: none;
+    border-right: 0;
   }
-  .city-list>li a {
-    width: auto;
-    display: block;
+  .city-list {
+    padding-bottom: 0;
+  }
+  #locations-map {
+    margin-left: 0;
+    border-top: 0;
+    border-left: 0;
   }
 }
 
@@ -191,10 +263,6 @@ Version: 1.0
 	.select-location a.dropdown-toggle {
 		min-width: 100px;
 		font-size: 16px !important;
-	}
-	.label-city {
-		text-align: center;
-		width: 230px;
 	}
 	
 	.header-cta img {
@@ -205,10 +273,6 @@ Version: 1.0
 		   -moz-border-radius: 0px;
 		        border-radius: 0px;
 	}
-  .city-list>li {
-    width: 100%;
-    margin: 0 0 10px 0;
-  }
 }
 
 @media (max-width: 320px) {
