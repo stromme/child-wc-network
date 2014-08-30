@@ -86,14 +86,18 @@ function add_google_map_js() {
         if(isset($wc_bloginfo['blog-'.$l['blog_id']])){
           $company = $wc_bloginfo['blog-'.$l['blog_id']]['company'];
           $url = $wc_bloginfo['blog-'.$l['blog_id']]['url'];
+          $blog_active = $wc_bloginfo['blog-'.$l['blog_id']]['blog_active'];
         }
         else {
           $tb_company = get_blog_option($l['blog_id'], 'tb_company');
           $company = isset($tb_company['name'])?$tb_company['name']:'';
           $url = get_home_url($l['blog_id']);
+          $deleted = get_blog_status($l['blog_id'], 'deleted');
+          $blog_active = !$deleted;
           $wc_bloginfo['blog-'.$l['blog_id']] = array(
             'company' => $company,
-            'url' => isset($url)?$url:''
+            'url' => isset($url)?$url:'',
+            'blog_active' => $blog_active
           );
         }
         $country=(strlen($l['zip'])<=3)?'CA':'US';
@@ -107,14 +111,16 @@ function add_google_map_js() {
             $lng = isset($json_map['results'][0]['geometry']['location']['lng'])?$json_map['results'][0]['geometry']['location']['lng']:'';
           }
         }catch(Exception $e){}
-        $wc_locations_cache['locations']['l'.$l['id']] = array(
-          'city' => $l['city'],
-          'state' => $l['province'],
-          'company' => $company,
-          'url' => $url,
-          'lat' => $lat,
-          'lng' => $lng
-        );
+        if($blog_active){
+          $wc_locations_cache['locations']['l'.$l['id']] = array(
+            'city' => $l['city'],
+            'state' => $l['province'],
+            'company' => $company,
+            'url' => $url,
+            'lat' => $lat,
+            'lng' => $lng
+          );
+        }
       }
       update_site_option('wc_company_locations_cache', $wc_locations_cache);
     }
