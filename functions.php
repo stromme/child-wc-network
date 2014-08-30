@@ -62,8 +62,75 @@ function add_google_map_js() {
   if($template_name=='page-templates/page-locations.php'){
     wp_register_script( 'google-map-api', 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDsgeBIjdh92uqzr0jWMHz_2YRljj_4sxc'/*?key=AIzaSyAkeTjrQLIwVYy8ScXJEoubUrrg0X7OYpU*/);
     wp_enqueue_script( 'google-map-api' );
+    wp_register_script( 'marker-cluster', plugins_url(). '/regions/markercluster.packed.js');
+    wp_enqueue_script( 'marker-cluster' );
     wp_register_script( 'wc-locations', get_stylesheet_directory_uri().'/js/locations.js', array('jquery'));
     wp_enqueue_script( 'wc-locations' );
+    $cache_all_location = get_site_option('wc_company_locations_cache');
+    $fetch = false;
+    // Fetch if initial or longer than one week or when there is inconsistency of array size due to new location addition and old location removal
+    if(!is_array($cache_all_location) || !isset($cache_all_location['time']) || (isset($cache_all_location['time']) && time()-$cache_all_location['time']>=(7*24*60*60))){
+      $fetch = true;
+    }
+    global $wpdb;
+    $locations = $wpdb->get_results("SELECT l.id, l.city, l.province, z.blog_id, z.location_id, z.zip FROM tb_zip_codes z, tb_locations l WHERE z.blog_id<>0 AND z.location_id=l.id GROUP BY z.location_id", ARRAY_A);
+    // Check if any inconsistency
+    $fetch = ($fetch || (!$fetch && count($locations)!=count($cache_all_location['locations'])));
+    if($fetch){
+      $wc_locations_cache = array(
+        'time' => time(),
+        'locations' => array()
+      );
+      $wc_bloginfo = array();
+      foreach($locations as $l){
+        if(isset($wc_bloginfo['blog-'.$l['blog_id']])){
+          $company = $wc_bloginfo['blog-'.$l['blog_id']]['company'];
+          $url = $wc_bloginfo['blog-'.$l['blog_id']]['url'];
+        }
+        else {
+          $tb_company = get_blog_option($l['blog_id'], 'tb_company');
+          $company = isset($tb_company['name'])?$tb_company['name']:'';
+          $url = get_home_url($l['blog_id']);
+          $wc_bloginfo['blog-'.$l['blog_id']] = array(
+            'company' => $company,
+            'url' => isset($url)?$url:''
+          );
+        }
+        $country=(strlen($l['zip'])<=3)?'CA':'US';
+        $map_data = get_map_data($l['city'],$l['province'],$country);
+        $lat = '';
+        $lng = '';
+        try {
+          $json_map = json_decode($map_data, true);
+          if($json_map['status']=='OK'){
+            $lat = isset($json_map['results'][0]['geometry']['location']['lat'])?$json_map['results'][0]['geometry']['location']['lat']:'';
+            $lng = isset($json_map['results'][0]['geometry']['location']['lng'])?$json_map['results'][0]['geometry']['location']['lng']:'';
+          }
+        }catch(Exception $e){}
+        $wc_locations_cache['locations']['l'.$l['id']] = array(
+          'city' => $l['city'],
+          'state' => $l['province'],
+          'company' => $company,
+          'url' => $url,
+          'lat' => $lat,
+          'lng' => $lng
+        );
+      }
+      update_site_option('wc_company_locations_cache', $wc_locations_cache);
+    }
+    else {
+      $wc_locations_cache = $cache_all_location;
+    }
+    $regions_var = array(
+      'pin' => plugins_url().'/regions/images/map-pin.png',
+      'cluster_pin' => array(
+        'small' => plugins_url().'/regions/images/cluster1.png',
+        'medium' => plugins_url().'/regions/images/cluster2.png',
+        'large' => plugins_url().'/regions/images/cluster3.png'
+      ),
+      'wc_locations' => array_values($wc_locations_cache['locations'])
+    );
+    wp_localize_script('wc-locations', 'locations_var', $regions_var);
   }
 }
 add_action('wp_head', 'add_google_map_js');
@@ -160,7 +227,7 @@ function select_windowcleaning_location(){
           if(count($locations)>0){
             $url .= 'locations/'.$locations[0]->post_name.'/';
           }
-          $map_data = get_map_data($result->city.','.$state.','.$country_name);
+          $map_data = get_map_data($result->city,$_REQUEST['state_province'],$_REQUEST['country']);
           $lat = '';
           $lng = '';
           try {
@@ -173,7 +240,8 @@ function select_windowcleaning_location(){
                 'state' => $state,
                 'company_name' => $company['name'],
                 'lat' => $lat,
-                'lng' => $lng
+                'lng' => $lng,
+                'url' => $url
               );
               array_push($markers, $marker);
             }
@@ -188,7 +256,7 @@ function select_windowcleaning_location(){
       $map_center = array('lat'=>$markers[0]['lat'], 'lng'=>$markers[0]['lng']);
     }
     else {
-      $center = get_map_data($state.','.$country_name);
+      $center = get_map_data('',$_REQUEST['state_province'],$_REQUEST['country']);
       try {
         $json_center = json_decode($center, true);
         if($json_center['status']=='OK'){
@@ -219,9 +287,22 @@ function select_windowcleaning_location(){
 add_action('wp_ajax_select_windowcleaning_location', 'select_windowcleaning_location');
 add_action('wp_ajax_nopriv_select_windowcleaning_location', 'select_windowcleaning_location');
 
-function get_map_data($search){
+/**
+ * Get map geocode based on address/parameter
+ *
+ * @param $address
+ * @param $state
+ * @param $country
+ * @return mixed
+ */
+function get_map_data($address,$state,$country){
   $curl = curl_init();
-  $url = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($search);
+  $query_params = array();
+  if($address!=''){
+    $query_params[] = 'address='.urlencode($address);
+  }
+  $query_params[] = 'components=administrative_area:'.$state.'|country:'.$country;
+  $url = "https://maps.googleapis.com/maps/api/geocode/json?".implode('&',$query_params).'&key=AIzaSyDsgeBIjdh92uqzr0jWMHz_2YRljj_4sxc';
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
   curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 0);

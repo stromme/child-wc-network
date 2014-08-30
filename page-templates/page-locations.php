@@ -17,7 +17,7 @@ get_header();
 		<div class="row-fluid">
       <div class="select-location">
         <?php if(isset($_REQUEST['find'])){ ?>
-        <h4><strong>Looks like we don't service that area yet, try searching below for a member in your area</strong></h4><br />
+        <h4><strong>Looks like we don't service that area yet, try searching below for a member in your area</strong></h4>
         <?php } ?>
         <h2>I need a great window cleaner in... </h2>
         <div class="buttons">
@@ -62,7 +62,7 @@ get_header();
           </li-->
         </ul>
       </div>
-      <div id="locations-map"></div>
+      <div id="google-maps"></div>
 	</div>
 	</div>
 </section>

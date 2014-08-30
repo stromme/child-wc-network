@@ -1,8 +1,8 @@
 var map;
 var default_lat_lng = {'us': {'lat': 39.7741861, "lng" : -101.8009427}, 'ca': {'lat': 57.55361079999999, "lng" : -102.2047349}};
 var markers = [];
+var plot_markers = [];
 var infowindow;
-var search_result = [];
 var recenter = '';
 
 $(document).ready(function(){
@@ -115,11 +115,11 @@ $(document).ready(function(){
       map.panTo(position);
     }
   });
-  $(document).on('mouseleave', '.city-list-container .city-list li>a', function(){
+  /*$(document).on('mouseleave', '.city-list-container .city-list li>a', function(){
     if(recenter!=''){
       map.panTo(recenter);
     }
-  });
+  });*/
 });
 
 /**
@@ -156,15 +156,15 @@ function wc_location_lookup(button){
           try {
             var response = JSON.parse(json_response);
             if(response.status==1){
-              if(markers.length>0){
+              /*if(markers.length>0){
                 while(markers.length>0){
                   var marker = markers.pop();
                   marker.setMap(null);
                 }
-              }
+              }*/
               result.append(response.html);
-              if(response.markers.length>0){
-                var image = response.pin;
+              /*if(response.markers.length>0){
+                var pin = new google.maps.MarkerImage(response.pin, null, null, null, new google.maps.Size(70,45));
                 $(response.markers).each(function(){
                   var marker = this;
                   var marker_pos = new google.maps.LatLng(marker.lat, marker.lng);
@@ -173,10 +173,10 @@ function wc_location_lookup(button){
                     map: map,
                     title: marker.company_name,
                     animation: google.maps.Animation.DROP,
-                    icon: image
+                    icon: pin
                   });
                   markers.push(plot_marker);
-                  var contentString = '<span style="position:relative;display:block;color:#333;font-weight:200;font-size:18px;text-decoration:none;"><span style="font-weight:500;">'+marker.city+',</span> <span style="color:#666;">'+marker.state+'</span><span style="display:block;font-size:14px;color:#66AFD4;">'+((marker.company_name)?marker.company_name:'')+'</span></span>';
+                  var contentString = '<a href="'+marker.url+'" target="_blank" class="marker-hover" style="position:relative;display:block;padding:5px;border-radius:5px;color:#333;font-weight:200;font-size:18px;text-decoration:none;"><span style="font-weight:500;">'+marker.city+',</span> <span style="color:#666;">'+marker.state+'</span><span style="display:block;font-size:14px;color:#66AFD4;">'+((marker.company_name)?marker.company_name:'')+'</span></a>';
                   google.maps.event.addListener(plot_marker, 'click', function() {
                     //map.setZoom(11);
                     //map.panTo(plot_marker.getPosition());
@@ -187,14 +187,13 @@ function wc_location_lookup(button){
                     infowindow.open(map,plot_marker);
                   });
                 });
-
-              }
-              map.setZoom(6);
+              }*/
+              map.setZoom(7);
               if(response.map_center!=''){
                 var position = new google.maps.LatLng(response.map_center.lat, response.map_center.lng);
                 recenter = position;
                 map.panTo(position);
-                //map.setCenter(position);
+                map.setCenter(position);
               }
             }
             else {
@@ -225,8 +224,59 @@ function wc_location_lookup(button){
 function initialize_map() {
   var mapOptions = {
     center: new google.maps.LatLng(default_lat_lng.us.lat, default_lat_lng.us.lng),
-    disableDefaultUI: true,
+    //disableDefaultUI: true,
     zoom: 5
   };
-  map = new google.maps.Map(document.getElementById("locations-map"), mapOptions);
+  map = new google.maps.Map(document.getElementById("google-maps"), mapOptions);
+  if(locations_var['wc_locations']){
+    var styles = [{
+      url: locations_var['cluster_pin']['small'],
+      width: 80,
+      height: 42,
+      textColor: '#ffffff',
+      textSize: 16
+    }, {
+      url: locations_var['cluster_pin']['medium'],
+      width: 80,
+      height: 67,
+      textColor: '#ffffff',
+      textSize: 16
+    }, {
+      url: locations_var['cluster_pin']['large'],
+      width: 80,
+      height: 61,
+      textColor: '#ffffff',
+      textSize: 16
+    }];
+    var pin = new google.maps.MarkerImage(locations_var['pin'], null, null, null, new google.maps.Size(70,45));
+    $(locations_var['wc_locations']).each(function(){
+      if(this.lat!='' && this.lng!=''){
+        var marker_pos = new google.maps.LatLng(this.lat, this.lng);
+        var plot_marker = new google.maps.Marker({
+          position: marker_pos,
+          map: map,
+          title: this.city+', '+this.state,
+          animation: google.maps.Animation.DROP,
+          icon: pin
+        });
+        var contentString = '<a href="'+this.url+'" target="_blank" class="marker-hover" style="position:relative;display:block;padding:5px;border-radius:5px;color:#333;font-weight:200;font-size:18px;text-decoration:none;"><span style="font-weight:500;">'+this.city+',</span> <span style="color:#666;">'+this.state+'</span><span style="display:block;font-size:14px;color:#66AFD4;">'+((this.company)?this.company:'')+'</span></a>';
+        google.maps.event.addListener(plot_marker, 'click', function() {
+          if (infowindow) infowindow.close();
+          infowindow = new google.maps.InfoWindow({
+              content: contentString
+          });
+          infowindow.open(map,plot_marker);
+        });
+
+        plot_markers.push(plot_marker);
+      }
+    });
+    //if (marker_clusterer) {
+      //marker_clusterer.clearMarkers();
+    //}
+    marker_clusterer = new MarkerClusterer(map, plot_markers, {
+      gridSize: 30,
+      styles: styles
+    });
+  }
 }
