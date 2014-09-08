@@ -39,6 +39,11 @@ $(document).ready(function(){
     template_container.append(current_list);
     list_container.append(new_list);
 
+    var list = $('.city-list');
+    $('li.not-found', list).hide();
+    $('li[data-country!="'+current_country+'"]', list).slideUp('fast');
+    $('li[data-country="'+current_country+'"]', list).slideDown('fast');
+
     // GA tracking
     if(typeof ga!='undefined' && ga){
       ga('send', 'event', 'Locations', 'Choose country', html);
@@ -85,8 +90,29 @@ $(document).ready(function(){
     var html = current.html()+' <span class="caret"></span>';
     selector.html(html);
 
-    var button = $('.select-location button');
-    wc_location_lookup(button);
+    //var button = $('.select-location button');
+    //wc_location_lookup(button);
+    var country = $('.select-location .select-country .dropdown-toggle').attr('data-country');
+    var state_province = $('.select-location .select-state-province .dropdown-toggle').attr('data-state-province');
+    var list = $('.city-list');
+    $('li.not-found', list).hide();
+    $('li[data-country!="'+country+'"]', list).slideUp('fast');
+    $('li[data-country="'+country+'"][data-state!="'+state_province+'"]', list).slideUp('fast');
+    $('li[data-country="'+country+'"][data-state="'+state_province+'"]', list).slideDown('fast');
+    setTimeout(function(){
+      if($('li:visible', list).length<=0) $('li.not-found', list).slideDown();
+      else {
+        var elm = $('a', $('li:visible', list).first());
+        var lat = elm.attr('data-lat');
+        var lng = elm.attr('data-lng');
+        if(lat && lng){
+          var position = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
+          map.panTo(position);
+          map.setCenter(position);
+        }
+      }
+    }, 300);
+
 
     // GA tracking
     if(typeof ga!='undefined' && ga){
@@ -250,7 +276,7 @@ function initialize_map() {
     }];
     var pin = new google.maps.MarkerImage(locations_var['pin'], null, null, null, new google.maps.Size(70,45));
     $(locations_var['wc_locations']).each(function(){
-      if(this.lat!='' && this.lng!=''){
+      if(this.lat!='' && this.lng!='' && !this.del){
         var marker_pos = new google.maps.LatLng(this.lat, this.lng);
         var plot_marker = new google.maps.Marker({
           position: marker_pos,

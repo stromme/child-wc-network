@@ -54,12 +54,20 @@ get_header();
       </div>
       <div class="city-list-container">
         <ul class="city-list">
-          <li>
-            <span class="text center">Please select a location</span>
-          </li>
-          <!--li>
-            <a href="http://www.windowcleaning.com/atlanta/" target="_blank"><span class="city">Atlanta,</span> <span class="state">South Carolina</span><span class="company-name">Crystal Clean Window Cleaning</span><span class="arrow"></span></a>
-          </li-->
+          <?php
+          global $wc_locations_cache;
+          $count_loc = count($wc_locations_cache['locations']);
+          if($count_loc>0){
+            foreach($wc_locations_cache['locations'] as $l){
+              ?>
+              <li data-country="<?=$l['country']?>" data-state="<?=$l['state']?>">
+                <a data-lat="<?=$l['lat']?>" data-lng="<?=$l['lng']?>" href="<?=$l['url']?>" target="_blank"><span class="city"><?=$l['city']?>,</span> <span class="state"><?=$l['state_name']?></span><span class="company-name"><?=$l['company']?></span><span class="arrow"></span></a>
+              </li>
+              <?php
+            }
+          }
+          ?>
+          <li class="not-found" data-country="" data-state="" style="display:none;"><span class="text center">We're sorry, it looks like we don't service that area yet. If you're a window cleaner or know a window cleaner that stands out as <strong>the best</strong> in this region, <a href="#" class="member-apply">let us know.</a></span></li>
         </ul>
       </div>
       <div id="google-maps"></div>

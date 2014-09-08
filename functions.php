@@ -76,6 +76,8 @@ function add_google_map_js() {
     $locations = $wpdb->get_results("SELECT l.id, l.city, l.province, z.blog_id, z.location_id, z.zip FROM tb_zip_codes z, tb_locations l WHERE z.blog_id<>0 AND z.location_id=l.id GROUP BY z.location_id", ARRAY_A);
     // Check if any inconsistency
     $fetch = ($fetch || (!$fetch && count($locations)!=count($cache_all_location['locations'])));
+    $fetch = true;
+    global $wc_locations_cache;
     if($fetch){
       $wc_locations_cache = array(
         'time' => time(),
@@ -93,7 +95,7 @@ function add_google_map_js() {
           $company = isset($tb_company['name'])?$tb_company['name']:'';
           $url = get_home_url($l['blog_id']);
           $deleted = get_blog_status($l['blog_id'], 'deleted');
-          $blog_active = !$deleted;
+          $blog_active = ($url!='' && $deleted==0);
           $wc_bloginfo['blog-'.$l['blog_id']] = array(
             'company' => $company,
             'url' => isset($url)?$url:'',
@@ -111,16 +113,21 @@ function add_google_map_js() {
             $lng = isset($json_map['results'][0]['geometry']['location']['lng'])?$json_map['results'][0]['geometry']['location']['lng']:'';
           }
         }catch(Exception $e){}
-        if($blog_active){
-          $wc_locations_cache['locations']['l'.$l['id']] = array(
-            'city' => $l['city'],
-            'state' => $l['province'],
-            'company' => $company,
-            'url' => $url,
-            'lat' => $lat,
-            'lng' => $lng
-          );
-        }
+        $country_states = tb_get_states($country);
+        $country_name = tb_get_countries($country);
+        $state_name = $country_states[$l['province']];
+        $wc_locations_cache['locations']['l'.$l['id']] = array(
+          'city' => $l['city'],
+          'state' => $l['province'],
+          'country' => $country,
+          'country_name' => $country_name,
+          'state_name' => $state_name,
+          'company' => $company,
+          'url' => $url,
+          'lat' => $lat,
+          'lng' => $lng,
+          'del' => !$blog_active
+        );
       }
       update_site_option('wc_company_locations_cache', $wc_locations_cache);
     }
