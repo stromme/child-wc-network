@@ -256,6 +256,15 @@ Version: 1.0
   }
 }
 
+@media (max-width: 767px) {
+  .city-list.no-provinces {
+    display: none;
+  }
+  #google-maps {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   .city-list-container {
     height: auto;

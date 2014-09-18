@@ -76,7 +76,6 @@ function add_google_map_js() {
     $locations = $wpdb->get_results("SELECT l.id, l.city, l.province, z.blog_id, z.location_id, z.zip FROM tb_zip_codes z, tb_locations l WHERE z.blog_id<>0 AND z.location_id=l.id GROUP BY z.location_id", ARRAY_A);
     // Check if any inconsistency
     $fetch = ($fetch || (!$fetch && count($locations)!=count($cache_all_location['locations'])));
-    $fetch = true;
     global $wc_locations_cache;
     if($fetch){
       $wc_locations_cache = array(
@@ -134,6 +133,7 @@ function add_google_map_js() {
     else {
       $wc_locations_cache = $cache_all_location;
     }
+    uasort($wc_locations_cache['locations'], "compare_locations");
     $regions_var = array(
       'pin' => plugins_url().'/regions/images/map-pin.png',
       'cluster_pin' => array(
@@ -147,6 +147,11 @@ function add_google_map_js() {
   }
 }
 add_action('wp_head', 'add_google_map_js');
+
+// For order
+function compare_locations($a,$b) {
+  return strcmp($a['city'].', '.$a['state'], $b['city'].', '.$b['state']);
+}
 
 /**
  * Ajax function to find location

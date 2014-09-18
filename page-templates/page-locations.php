@@ -53,14 +53,14 @@ get_header();
         </div>
       </div>
       <div class="city-list-container">
-        <ul class="city-list">
+        <ul class="city-list no-provinces">
           <?php
           global $wc_locations_cache;
           $count_loc = count($wc_locations_cache['locations']);
           if($count_loc>0){
             foreach($wc_locations_cache['locations'] as $l){
               ?>
-              <li data-country="<?=$l['country']?>" data-state="<?=$l['state']?>">
+              <li data-country="<?=$l['country']?>" data-state="<?=$l['state']?>"<?=($l['country']=='CA')?' style="display:none;"':''?>>
                 <a data-lat="<?=$l['lat']?>" data-lng="<?=$l['lng']?>" href="<?=$l['url']?>" target="_blank"><span class="city"><?=$l['city']?>,</span> <span class="state"><?=$l['state_name']?></span><span class="company-name"><?=$l['company']?></span><span class="arrow"></span></a>
               </li>
               <?php

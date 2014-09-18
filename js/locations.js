@@ -32,7 +32,7 @@ $(document).ready(function(){
     current.attr('data-country', temp);
     html = (temp=='US')?'United States':'Canada';
     current.html(html);
-    var list_container = $('.dropdown-menu', state_province_selector);
+    var list_container= $('.dropdown-menu', state_province_selector);
     var current_list = $('li', list_container);
     var template_container = $('#state-province-templates');
     var new_list = $('li', template_container);
@@ -41,8 +41,18 @@ $(document).ready(function(){
 
     var list = $('.city-list');
     $('li.not-found', list).hide();
-    $('li[data-country!="'+current_country+'"]', list).slideUp('fast');
-    $('li[data-country="'+current_country+'"]', list).slideDown('fast');
+
+    var window_w = $(window).width();
+    if(window_w<768){
+      $('li[data-country!="'+current_country+'"]', list).hide();
+      $('li[data-country="'+current_country+'"]', list).show();
+    }
+    else {
+      $('li[data-country!="'+current_country+'"]', list).slideUp('fast');
+      $('li[data-country="'+current_country+'"]', list).slideDown('fast');
+    }
+
+    list.addClass('no-provinces');
 
     // GA tracking
     if(typeof ga!='undefined' && ga){
@@ -96,11 +106,27 @@ $(document).ready(function(){
     var state_province = $('.select-location .select-state-province .dropdown-toggle').attr('data-state-province');
     var list = $('.city-list');
     $('li.not-found', list).hide();
-    $('li[data-country!="'+country+'"]', list).slideUp('fast');
-    $('li[data-country="'+country+'"][data-state!="'+state_province+'"]', list).slideUp('fast');
-    $('li[data-country="'+country+'"][data-state="'+state_province+'"]', list).slideDown('fast');
+
+    var window_w = $(window).width();
+    if(window_w<768){
+      $('li[data-country!="'+country+'"]', list).hide();
+      $('li[data-country="'+country+'"][data-state!="'+state_province+'"]', list).hide();
+      $('li[data-country="'+country+'"][data-state="'+state_province+'"]', list).show();
+    }
+    else {
+      $('li[data-country!="'+country+'"]', list).slideUp('fast');
+      $('li[data-country="'+country+'"][data-state!="'+state_province+'"]', list).slideUp('fast');
+      $('li[data-country="'+country+'"][data-state="'+state_province+'"]', list).slideDown('fast');
+    }
+
     setTimeout(function(){
-      if($('li:visible', list).length<=0) $('li.not-found', list).slideDown();
+      if($('li:visible', list).length<=0){
+        if(window_w<768) {
+          $('li.not-found', list).show();
+        } else {
+          $('li.not-found', list).slideDown();
+        }
+      }
       else {
         var elm = $('a', $('li:visible', list).first());
         var lat = elm.attr('data-lat');
@@ -113,6 +139,7 @@ $(document).ready(function(){
       }
     }, 300);
 
+    list.removeClass('no-provinces');
 
     // GA tracking
     if(typeof ga!='undefined' && ga){
@@ -136,9 +163,12 @@ $(document).ready(function(){
     var lat = elm.attr('data-lat');
     var lng = elm.attr('data-lng');
     if(lat && lng){
-      var position = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
-      recenter = map.getCenter();
-      map.panTo(position);
+      var window_w = $(window).width();
+      if(window_w>=768){
+        var position = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
+        recenter = map.getCenter();
+        map.panTo(position);
+      }
     }
   });
   /*$(document).on('mouseleave', '.city-list-container .city-list li>a', function(){
@@ -214,12 +244,15 @@ function wc_location_lookup(button){
                   });
                 });
               }*/
-              map.setZoom(7);
-              if(response.map_center!=''){
-                var position = new google.maps.LatLng(response.map_center.lat, response.map_center.lng);
-                recenter = position;
-                map.panTo(position);
-                map.setCenter(position);
+              var window_w = $(window).width();
+              if(window_w>=768){
+                map.setZoom(7);
+                if(response.map_center!=''){
+                  var position = new google.maps.LatLng(response.map_center.lat, response.map_center.lng);
+                  recenter = position;
+                  map.panTo(position);
+                  map.setCenter(position);
+                }
               }
             }
             else {
