@@ -43,7 +43,7 @@ $(document).ready(function(){
     $('li.not-found', list).hide();
 
     var window_w = $(window).width();
-    if(window_w<768){
+    if(window_w<768 || is_touch_device()){
       $('li[data-country!="'+current_country+'"]', list).hide();
       $('li[data-country="'+current_country+'"]', list).show();
     }
