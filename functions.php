@@ -62,8 +62,18 @@ function add_google_map_js() {
   if($template_name=='page-templates/page-locations.php'){
     wp_register_script( 'google-map-api', 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDsgeBIjdh92uqzr0jWMHz_2YRljj_4sxc'/*?key=AIzaSyAkeTjrQLIwVYy8ScXJEoubUrrg0X7OYpU*/);
     wp_enqueue_script( 'google-map-api' );
-    wp_register_script( 'marker-cluster', plugins_url(). '/regions/markercluster.packed.js');
-    wp_enqueue_script( 'marker-cluster' );
+    $file = '/regions/markercluster.packed.js';
+    $plugins_url = '';
+    if(is_file(ABSPATH.'wp-content/plugins'.$file)){
+      $plugins_url = plugins_url();
+    }
+    else if(is_file(ABSPATH.'wp-content/plugins/toolbox/plugins'.$file)){
+      $plugins_url = plugins_url(). '/toolbox/plugins';
+    }
+    if($plugins_url!=''){
+      wp_register_script( 'marker-cluster', $plugins_url.$file);
+      wp_enqueue_script( 'marker-cluster' );
+    }
     wp_register_script( 'wc-locations', get_stylesheet_directory_uri().'/js/locations.js', array('jquery'));
     wp_enqueue_script( 'wc-locations' );
     $cache_all_location = get_site_option('wc_company_locations_cache');
@@ -135,11 +145,11 @@ function add_google_map_js() {
     }
     uasort($wc_locations_cache['locations'], "compare_locations");
     $regions_var = array(
-      'pin' => plugins_url().'/regions/images/map-pin.png',
+      'pin' => $plugins_url.'/regions/images/map-pin.png',
       'cluster_pin' => array(
-        'small' => plugins_url().'/regions/images/cluster1.png',
-        'medium' => plugins_url().'/regions/images/cluster2.png',
-        'large' => plugins_url().'/regions/images/cluster3.png'
+        'small' => $plugins_url.'/regions/images/cluster1.png',
+        'medium' => $plugins_url.'/regions/images/cluster2.png',
+        'large' => $plugins_url.'/regions/images/cluster3.png'
       ),
       'wc_locations' => array_values($wc_locations_cache['locations'])
     );
@@ -163,7 +173,12 @@ function find_windowcleaning_location(){
   if(defined('W3TC_LIB_W3_DIR') || (!defined('W3TC_LIB_W3_DIR') && wp_verify_nonce((isset($_REQUEST['_nonce'])?$_REQUEST['_nonce']:''), 'find-location-'.date('Ymd')))){
     global $wpdb;
     $zip = $_REQUEST['zip'];
-    $wpdb->query("SELECT * FROM tb_zip_codes WHERE zip='".$zip."' ORDER BY id ASC");
+    // Oh Canada...
+    if(strlen($zip)>6){
+      $match = preg_match('/^([ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}) *\d{1}[A-Z]{1}\d{1}$/', $zip, $matches);
+      if($match>0) $zip = $matches[1];
+    }
+    $wpdb->query("SELECT * FROM tb_zip_codes WHERE zip='".$zip."' && blog_id>0 ORDER BY id ASC");
     $blog_id = '';
     $results = $wpdb->last_result;
     if(count($results)>0){
