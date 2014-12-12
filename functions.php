@@ -174,9 +174,10 @@ function find_windowcleaning_location(){
     global $wpdb;
     $zip = $_REQUEST['zip'];
     // Oh Canada...
-    if(strlen($zip)>6){
-      $match = preg_match('/^([ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}) *\d{1}[A-Z]{1}\d{1}$/', $zip, $matches);
-      if($match>0) $zip = $matches[1];
+    if(strlen($zip)>=6){
+      $match = preg_match('/^([ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}) *\d{1}[A-Za-z]{1}\d{1}$/', $zip, $matches);
+      if($match>0) $zip = strtoupper($matches[1]);
+      else $zip = strtoupper($_REQUEST['zip']);
     }
     $wpdb->query("SELECT * FROM tb_zip_codes WHERE zip='".$zip."' && blog_id>0 ORDER BY id ASC");
     $blog_id = '';
