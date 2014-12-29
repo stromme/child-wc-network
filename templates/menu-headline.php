@@ -63,9 +63,8 @@ if ( get_bloginfo('name') == 'Membership') {
 	
 	
 	?>
-	
-	
-	<header class="container">
+
+	<header class="container bumper-bottom">
 		<div class="headline">
 			<ul>
 				<li class="headline-title">

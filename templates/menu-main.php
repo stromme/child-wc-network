@@ -7,8 +7,9 @@
  * @subpackage 
  * @since 
  */
-?>
-<!--<header class="container">
+
+/*
+<header class="container">
 	<nav class="pull-right header-cta">
 		<div class="center border-radius header-cta-well">
 			<h3>Find your nearest location and <strong>get a instant quote</strong></h3>
@@ -31,4 +32,6 @@
 	</div>
 	<!-- /Brand --*>
 	
-</header>-->
+</header>*/
+
+?>

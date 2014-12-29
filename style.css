@@ -38,6 +38,10 @@ Version: 1.0
 	padding-top: 10px;
 }
 
+.brand img {
+  height: 135px;
+}
+
 .select-location {
   text-align: center;
   margin-bottom: 10px;
